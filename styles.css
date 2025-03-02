@@ -1,0 +1,25 @@
+/* Fondo personalizado */
+body {
+    background-image: url("background.jpg"); /* O usa una URL */
+    background-size: cover; /* Asegúrate de que la imagen cubra todo el fondo */
+    background-repeat: no-repeat; /* No repitas la imagen */
+    background-attachment: fixed; /* Fija la imagen */
+    background-position: center; /* Centra la imagen */
+}
+
+/* Texto del título */
+h1 {
+    font-family: 'Arial', sans-serif;
+    color: #4CAF50; /* Verde */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra */
+    text-align: center;
+}
+
+/* Otros ajustes */
+.stButton>button {
+    background-color: #384B70;
+    color: white;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-size: 16px;
+}

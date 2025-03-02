@@ -14,7 +14,33 @@
 [Ss]cripts
 pyvenv.cfg
 .venv
+venv/
+ENV/
+env/
+*.env
 pip-selfcheck.json
+
+# Ignorar cachés de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignorar configuraciones temporales y archivos generados
+*.DS_Store
+*.log
+*.cache
+
+# Ignorar archivos de Streamlit generados (como pydeck.json)
+.streamlit/
+pydeck.json
+index.js
+index.js.map
+extensionRequires.js
+ttx.1
+
+# Otros archivos no deseados
+*.swp  # Archivos swap temporales
+*.bak  # Archivos de respaldo
 
 ### VisualStudioCode ###
 .vscode/*
