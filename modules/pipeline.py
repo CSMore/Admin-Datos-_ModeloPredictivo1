@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import csv
+import requests
+from io import BytesIO
 
 
 #Configuración de login para auditorias
@@ -33,7 +35,22 @@ class eda:
             """
             separa = None
             try:
-                if path.startswith("http"):
+                if path.endswith(".xls") or path.endswith(".xlsx"):
+                    if path.startswith("http"):
+                        raw_url = path.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/")
+                        response = requests.get(raw_url, stream=True)
+                        if response.status_code == 200:
+                            self.df = pd.read_excel(BytesIO(response.content), sheet_name=0)
+                            st.write("Archivo Excel cargado con éxito desde URL.")
+                            logging.info("Archivo Excel cargado con éxito desde URL.")
+                        else:
+                            raise ValueError(f"Error al descargar el archivo: {response.status_code}")
+                    else:
+                        self.df = pd.read_excel(path, sheet_name=0)
+                        st.write("Archivo Excel cargado con éxito.")
+                        logging.info("Archivo Excel cargado con éxito.")
+
+                elif path.startswith("http"):
                     self.df = pd.read_csv(path, sep=",", decimal=".")
                 else:
                     with open(path, 'r', encoding='utf-8') as file:
@@ -67,12 +84,6 @@ class eda:
         st.markdown(f"<u> Estos son los primeros {n} registros del dataset: </u>", unsafe_allow_html=True)
         return self.df.head(n)
 
-     def describe_data(self):
-        """Genera estadísticas descriptivas básicas del DataFrame."""
-        self._check_df()
-        st.markdown("<u> Estadística descriptiva del conjunto de datos: </u>", unsafe_allow_html=True)
-        return self.df.describe()            
-
      def check_missing_values(self):
         """Revisa los valores faltantes en el DataFrame."""
         self._check_df()
@@ -82,12 +93,6 @@ class eda:
             st.write("¡Todos los valores están completos! No hay valores faltantes.")
         else:
             st.write(missing_values)
-
-     def check_data_types(self):
-        """Muestra los tipos de datos de cada columna del DataFrame."""
-        self._check_df()
-        st.markdown("<u> Tipos de datos por columna: </u>", unsafe_allow_html=True)
-        return self.df.dtypes
 
      def identify_duplicates(self):
         """Identifica duplicados en el DataFrame."""
@@ -105,6 +110,15 @@ class eda:
             st.write("No se encontraron registros duplicados en el dataset.")
             return False # no hay duplicados
 
+     def check_data_types(self):
+        """Muestra los tipos de datos de cada columna del DataFrame."""
+        self._check_df()
+        st.markdown("<u> Tipos de datos por columna: </u>", unsafe_allow_html=True)
+        return self.df.dtypes
+
+
+
+
      def drop_duplicates(self):
         """Elimina duplicados del DataFrame."""
         self._check_df()
@@ -112,6 +126,14 @@ class eda:
         self.df = self.df.drop_duplicates()
         after = len(self.df)
         st.write(f"Duplicados eliminados. Se pasó de {before} a {after} registros.")
+
+     def describe_data(self):
+        """Genera estadísticas descriptivas básicas del DataFrame."""
+        self._check_df()
+        st.markdown("<u> Estadística descriptiva del conjunto de datos: </u>", unsafe_allow_html=True)
+        return self.df.describe()            
+
+
 
 
 
@@ -137,6 +159,8 @@ class eda:
         """Convierte las columnas categóricas del DataFrame a variables dummy."""
         self._check_df()
         return pd.get_dummies(self.df)
+
+
 
      def plot_distributions(self):
         """Grafica la distribución de las columnas numéricas."""
@@ -220,25 +244,39 @@ class app:
             eda_instance = eda()
             backup_instance = fileHandler()
             #Extraccion de datos desde un archivo CSV en GitHub
-            path = "https://raw.githubusercontent.com/alitoxSB/data_pipeline/main/predictive_maintenance.csv"
+            path = "https://github.com/CSMore/Admin-Datos-_ModeloPredictivo1/blob/main/Fertilizantes_CR_En-Feb_2025.xlsx"
+            #path = "https://github.com/CSMore/Admin-Datos-_ModeloPredictivo1/raw/main/Fertilizantes_CR_En-Feb_2025.xlsx"
+
+            #path = "https://raw.githubusercontent.com/alitoxSB/data_pipeline/main/predictive_maintenance.csv"
+
+
 
             try:
                 eda_instance.read_dataset(path)
                 df = eda_instance.df
+
                 st.dataframe(eda_instance.show_head(6))
                 st.write("")
+                eda_instance.check_missing_values()
+                st.write("")
+                eda_instance.identify_duplicates()
+                st.write("")
+                st.write(eda_instance.check_data_types())
+
+                fileHandler.backup_data(eda_instance.df, "backup_data.csv")
+                st.write("***** Datos respaldados en 'Backup_data.csv'. *****")   
+                st.write("") 
 
                 if eda_instance.identify_duplicates():
                     eda_instance.drop_duplicates()
                 st.write("")
-                fileHandler.backup_data(eda_instance.df, "backup_data.csv")
-                st.write("***** Datos respaldados en 'Backup_data.csv'. *****")   
-                st.write("")                 
+             
+                
                 st.write(eda_instance.describe_data())
-                st.write("")
-                eda_instance.check_missing_values()
-                st.write("")
-                st.write(eda_instance.check_data_types())
+                
+
+                
+
                 ''' Hay que agregar los cambios en los datos antes de los graficos  '''
 
 

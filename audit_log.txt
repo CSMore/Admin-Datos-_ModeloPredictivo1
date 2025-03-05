@@ -1,0 +1,21 @@
+2025-03-04 19:27:52,806 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-04 19:27:52,930 - Backup realizado con exito en : backup_data.csv
+2025-03-04 19:27:56,103 - Error al cargar los datos: could not convert string to float: 'M14860'
+2025-03-04 19:39:51,375 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-04 19:39:51,464 - Backup realizado con exito en : backup_data.csv
+2025-03-04 19:39:54,665 - Error al cargar los datos: could not convert string to float: 'M14860'
+2025-03-04 19:42:02,464 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-04 19:42:02,573 - Backup realizado con exito en : backup_data.csv
+2025-03-04 19:42:05,084 - Error al cargar los datos: could not convert string to float: 'M14860'
+2025-03-04 20:22:50,804 - Error al cargar el archivo: https://raw.githubusercontent.com/CSMore/Admin-Datos-_ModeloPredictivo1/main/Fertilizantes_CR_En-Feb_2025.xlsx: Error al descargar el archivo: 404
+2025-03-04 20:22:50,806 - Error al cargar los datos: Error al descargar el archivo: 404
+2025-03-04 20:25:58,691 - Error al cargar el archivo: https://github.com/CSMore/Admin-Datos-_ModeloPredictivo1/blob/main/Fertilizantes_CR_En-Feb_2025.xlsx: Error al descargar el archivo: 404
+2025-03-04 20:25:58,692 - Error al cargar los datos: Error al descargar el archivo: 404
+2025-03-04 20:32:51,040 - Error al cargar el archivo: https://github.com/CSMore/Admin-Datos-_ModeloPredictivo1/raw/main/Fertilizantes_CR_En-Feb_2025.xlsx: Error al descargar el archivo: 404
+2025-03-04 20:32:51,041 - Error al cargar los datos: Error al descargar el archivo: 404
+2025-03-04 20:38:57,747 - Error al cargar el archivo: https://github.com/CSMore/Admin-Datos-_ModeloPredictivo1/raw/main/Fertilizantes_CR_En-Feb_2025.xlsx: Error al descargar el archivo: 404
+2025-03-04 20:38:57,749 - Error al cargar los datos: Error al descargar el archivo: 404
+2025-03-04 20:45:42,700 - Error al cargar el archivo: https://github.com/CSMore/Admin-Datos-_ModeloPredictivo1/blob/main/Fertilizantes_CR_En-Feb_2025.xlsx: Error al descargar el archivo: 404
+2025-03-04 20:45:42,702 - Error al cargar los datos: Error al descargar el archivo: 404
+2025-03-04 20:45:59,660 - Error al cargar el archivo: https://github.com/CSMore/Admin-Datos-_ModeloPredictivo1/blob/main/Fertilizantes_CR_En-Feb_2025.xlsx: Error al descargar el archivo: 404
+2025-03-04 20:45:59,661 - Error al cargar los datos: Error al descargar el archivo: 404
