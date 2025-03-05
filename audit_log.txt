@@ -1,2 +1,0 @@
-2025-03-04 02:10:22,687 - Datos cargados con éxito. Separador detectado: 'None'
-2025-03-04 02:10:25,043 - Error al cargar los datos: could not convert string to float: 'M14860'
