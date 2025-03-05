@@ -40,27 +40,26 @@ source venv/bin/activate  # En Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 📥 Extracción y Procesamiento de Datos
+### 📥 Carga y Procesamiento de Datos
 ```bash
-python src/extraction.py   # Extraer datos desde API / Web scraping
-python src/preprocessing.py  # Limpieza y transformación de datos
+python modules/pipeline.py   # Cargar y procesar datos
 ```
 
 ### 🎯 Entrenamiento del Modelo
 ```bash
-python src/model.py
+python modules/pipeline.py   # Cargar y entrenar modelo
 ```
 
 ### 🌐 Ejecutar la Aplicación Web
 ```bash
-streamlit run src/streamlit_app.py
+streamlit run app_control.py   # Ejecutar la aplicación principal
 ```
 
 ---
 
 ## 📖 Tabla de Contenidos
-1️⃣ [Arquitectura del Data Pipeline](#)  
-2️⃣ [Integración del Modelo de IA](#)  
-3️⃣ [Seguridad, Criptografía y Limpieza de Datos](#)
+1️⃣ [Código Fuente](https://github.com/CSMore/Admin-Datos-_ModeloPredictivo1)  
+2️⃣ [Documentación Técnica](https://github.com/CSMore/Admin-Datos-_ModeloPredictivo1/blob/main/Trabajo%20en%20grupo%201%20-%20Documentaci%C3%B3n%20t%C3%A9cnica.docx)  
+3️⃣ [Informe del Proyecto](#)
 
 ---
