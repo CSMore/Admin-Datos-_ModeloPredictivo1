@@ -2,186 +2,155 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import xgboost as xgb
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder, StandardScaler
-from sklearn.metrics import (
-    confusion_matrix, 
-    classification_report
-)
+import shap
 import plotly.express as px
-import plotly.graph_objs as go
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix, classification_report
+from pipeline import eda  # Importamos el pipeline
 
 def cargar_datos():
     """
-    Carga los datos desde un archivo local
-    
-    Returns:
-    - DataFrame con los datos de fertilizantes
+    Obtiene los datos procesados desde el pipeline y lo carga desde session_state.
     """
-    try:
-        # Asegúrate de que el archivo esté en la misma carpeta que tu script
-        df = pd.read_excel('Fertilizantes_CR_En-Feb_2025.xlsx')
-        return df
-    except Exception as e:
-        st.error(f"Error al cargar los datos: {e}")
+    if "df_procesado" in st.session_state:
+        return st.session_state["df_procesado"]
+    else:
+        st.error("No hay datos procesados disponibles. Ejecuta primero el Pipeline.")
         return None
-
-def preprocesar_datos(df):
-    """
-    Preprocesa los datos para el modelo XGBoost
-    
-    Args:
-    - df (DataFrame): Datos originales
-    
-    Returns:
-    - X (array): Variables predictoras
-    - y (array): Variable objetivo
-    - scaler: Objeto de escalamiento
-    """
-    # Convertir fecha a características numéricas
-    df['Fecha'] = pd.to_datetime(df['Fecha'])
-    df['Año'] = df['Fecha'].dt.year
-    df['Mes'] = df['Fecha'].dt.month
-
-    # Codificar variables categóricas
-    label_encoders = {}
-    categoricas = [
-        'Tipo', 'Nombre Comercial', 'Unidad', 'Modalidad', 
-        'Importador Exportador', 'Pais Origen', 'Pais Destino', 
-        'Puerto Ingreso', 'Componente IAGT'
-    ]
-    
-    for columna in categoricas:
-        le = LabelEncoder()
-        df[columna + '_encoded'] = le.fit_transform(df[columna].astype(str))
-        label_encoders[columna] = le
-
-    # Seleccionar características para el modelo
-    caracteristicas = [
-        'Año', 'Mes', 'Cantidad', 'Peso', 'Valor',
-        'Tipo_encoded', 'Nombre Comercial_encoded', 'Unidad_encoded', 
-        'Modalidad_encoded', 'Importador Exportador_encoded', 
-        'Pais Origen_encoded', 'Pais Destino_encoded', 
-        'Puerto Ingreso_encoded', 'Componente IAGT_encoded'
-    ]
-
-    # Variable objetivo (Pais Destino)
-    X = df[caracteristicas]
-    y = df['Pais Destino_encoded']  # Predecir país de destino codificado
-    
-    # Escalar características
-    scaler = StandardScaler()
-    X_escalado = scaler.fit_transform(X)
-    
-    return X_escalado, y, scaler, label_encoders, df
 
 def entrenar_modelo(X, y):
     """
-    Entrena un modelo XGBoost
-    
-    Args:
-    - X (array): Variables predictoras escaladas
-    - y (array): Variable objetivo
-    
-    Returns:
-    - Modelo entrenado
-    - Métricas de rendimiento
+    Entrena un modelo XGBoost con monitoreo de pérdida.
     """
-    # Dividir datos
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     
-    # Configurar modelo XGBoost para clasificación
-    modelo = xgb.XGBClassifier(
-        n_estimators=100, 
-        learning_rate=0.1, 
-        random_state=42
+    modelo = xgb.XGBClassifier(n_estimators=100, learning_rate=0.1, random_state=42)
+
+    eval_set = [(X_train, y_train), (X_test, y_test)]
+    modelo.fit(X_train, y_train, eval_metric="logloss", eval_set=eval_set, verbose=False)
+
+    resultados = modelo.evals_result()
+
+    return modelo, resultados, (X_test, y_test, y_pred)
+
+def analizar_resultados(metricas):
+    """
+    Analiza los resultados del modelo y proporciona una interpretación en base a las métricas.
+    """
+    precision = metricas["Precisión"]
+    exactitud = metricas["Exactitud"]
+
+    st.header("📊 Análisis de Resultados")
+
+    if precision > 0.90:
+        st.success(f"🌟 Excelente rendimiento del modelo con una precisión de {precision:.2%}.")
+    elif 0.75 <= precision <= 0.90:
+        st.info(f"✅ Buen rendimiento con una precisión de {precision:.2%}.")
+    else:
+        st.warning(f"⚠️ Precisión baja ({precision:.2%}). Considera revisar los datos y ajustar hiperparámetros.")
+
+    if exactitud > 0.90:
+        st.success(f"🔍 Alta exactitud ({exactitud:.2%}).")
+    elif 0.75 <= exactitud <= 0.90:
+        st.info(f"📌 Exactitud moderada ({exactitud:.2%}).")
+    else:
+        st.warning(f"⚠️ Exactitud baja ({exactitud:.2%}). Revisa posibles problemas en los datos.")
+
+def graficar_perdida(resultados):
+    """
+    Grafica la evolución de la pérdida durante el entrenamiento.
+    """
+    st.header("📉 Evolución de la Pérdida del Modelo")
+
+    fig = px.line(
+        x=range(len(resultados["validation_0"]["logloss"])),
+        y=resultados["validation_0"]["logloss"],
+        labels={"x": "Iteraciones", "y": "Pérdida LogLoss"},
+        title="Curva de Pérdida en el Entrenamiento"
     )
-    
-    # Entrenar modelo
-    modelo.fit(X_train, y_train)
-    
-    # Predicciones
-    y_pred = modelo.predict(X_test)
-    
-    # Calcular métricas
-    metricas = {
-        'Precisión': modelo.score(X_test, y_test),
-        'Exactitud': modelo.score(X_test, y_test)
-    }
-    
-    return modelo, metricas, (X_test, y_test, y_pred)
+    fig.add_scatter(
+        x=range(len(resultados["validation_1"]["logloss"])),
+        y=resultados["validation_1"]["logloss"],
+        mode="lines",
+        name="Validación"
+    )
+
+    st.plotly_chart(fig)
+
+def graficar_importancia(modelo, df_original):
+    """
+    Grafica la importancia de las características.
+    """
+    st.header("🔎 Importancia de las Características")
+
+    importancia = modelo.feature_importances_
+    fig = px.bar(
+        x=df_original.columns,
+        y=importancia,
+        labels={"x": "Características", "y": "Importancia"},
+        title="Importancia de Características en la Predicción"
+    )
+
+    st.plotly_chart(fig)
+
+def graficar_shap(modelo, X_test, df_original):
+    """
+    Grafica los valores SHAP para interpretar el modelo.
+    """
+    st.header("🤖 Interpretabilidad con SHAP")
+
+    explainer = shap.Explainer(modelo)
+    shap_values = explainer(X_test)
+
+    fig, ax = plt.subplots(figsize=(10, 5))
+    shap.summary_plot(shap_values, df_original, plot_type="bar", show=False)
+    st.pyplot(fig)
+
+def graficar_predicciones(y_test, y_pred, df_original):
+    """
+    Muestra un histograma de predicciones del modelo.
+    """
+    st.header("📊 Distribución de Predicciones")
+
+    df_pred = pd.DataFrame({"Real": y_test, "Predicción": y_pred})
+    df_pred["Real"] = df_pred["Real"].map(lambda x: df_original["Pais Destino"].unique()[x])
+    df_pred["Predicción"] = df_pred["Predicción"].map(lambda x: df_original["Pais Destino"].unique()[x])
+
+    fig = px.histogram(
+        df_pred,
+        x="Predicción",
+        title="Distribución de Predicciones por País Destino"
+    )
+
+    st.plotly_chart(fig)
 
 def mostrar_resultados():
     """
-    Módulo principal para mostrar resultados del modelo
+    Módulo principal para mostrar resultados del modelo.
     """
-    # Paleta de colores personalizada (tonos celestes y verdes)
-    color_palette = {
-        'matriz_confusion': '#20B2AA',  # Light Sea Green
-        'importancia': '#2E8B57',       # Sea Green
-        'metricas_fondo': '#E0F2F1',    # Light Teal
-        'metricas_texto': '#00695C'     # Dark Teal
-    }
-
-    st.title("🌱 Predicción de Destino de Exportación de Fertilizantes")
+    st.title("Predicción de Destino de Exportación de Fertilizantes")
     
-    # Cargar datos
     df = cargar_datos()
     if df is None:
         return
     
-    # Preprocesar datos
-    X, y, scaler, label_encoders, df_original = preprocesar_datos(df)
+    # La data ya viene preprocesada del pipeline
+    X = df.drop(columns=["Pais Destino"])
+    y = df["Pais Destino"]
+
+    modelo, resultados, (X_test, y_test) = entrenar_modelo(X, y)
+
+    analizar_resultados({"Precisión": modelo.score(X_test, y_test), "Exactitud": modelo.score(X_test, y_test)})
     
-    # Entrenar modelo
-    modelo, metricas, (X_test, y_test, y_pred) = entrenar_modelo(X, y)
+    graficar_perdida(resultados)
+    graficar_importancia(modelo, df)
+    graficar_shap(modelo, X_test, df)
+    graficar_predicciones(y_test, modelo.predict(X_test), df)
+
+if __name__ == "__main__":
+    mostrar_resultados()
     
-    # Sección de Métricas con fondo celeste
-    st.header("Rendimiento del Modelo")
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.metric("Precisión", f"{metricas['Precisión']:.2%}")
-    with col2:
-        st.metric("Exactitud", f"{metricas['Exactitud']:.2%}")
-    
-    # Decodificar predicciones y valores reales
-    paises_destino = label_encoders['Pais Destino'].classes_
-    
-    # Mostrar Matriz de Confusión con color verde agua
-    st.header("Matriz de Confusión")
-    cm = confusion_matrix(y_test, y_pred)
-    fig_cm = px.imshow(cm, 
-        labels=dict(x="Predicción", y="Real", color="Frecuencia"),
-        x=paises_destino,
-        y=paises_destino,
-        title="Matriz de Confusión de Países de Destino",
-        color_continuous_scale=[[0, color_palette['matriz_confusion']], [1, '#00BFA5']]
-    )
-    st.plotly_chart(fig_cm)
-    
-    # Importancia de características con tonos verdes
-    importancia = modelo.feature_importances_
-    caracteristicas = [
-        'Año', 'Mes', 'Cantidad', 'Peso', 'Valor',
-        'Tipo', 'Nombre Comercial', 'Unidad', 
-        'Modalidad', 'Importador Exportador', 'Pais Origen', 
-        'Pais Destino', 'Puerto Ingreso', 'Componente IAGT'
-    ]
-    
-    fig_importancia = px.bar(
-        x=caracteristicas, 
-        y=importancia, 
-        title='Importancia de Características para Predecir Destino',
-        color_discrete_sequence=[color_palette['importancia']]
-    )
-    st.plotly_chart(fig_importancia)
-    
-    # Informe de Clasificación
     st.header("Informe de Clasificación")
     reporte = classification_report(y_test, y_pred, target_names=paises_destino)
     st.text(reporte)
-
-# Opcional: Si quieres ejecutar directamente este módulo
-if __name__ == "__main__":
-    mostrar_resultados()
