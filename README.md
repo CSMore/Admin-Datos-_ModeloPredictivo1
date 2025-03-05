@@ -1,33 +1,30 @@
-# 📌 Análisis Temporal con XGBoost
-
-![XGBoost Time Series](https://via.placeholder.com/1200x300?text=An%C3%A1lisis+Temporal+con+XGBoost)
-
+# 📌 Análisis Temporal de Exportaciones de Fertilizantes con XGBoost
+![Fertilizer Export Prediction](time series.png)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/) [![XGBoost](https://img.shields.io/badge/XGBoost-1.6%2B-green)](https://xgboost.ai/) [![Streamlit](https://img.shields.io/badge/Streamlit-App-red)](https://streamlit.io/)
 
 ## 👥 Participantes
 - **Kristhel Porras**
 - **Carolina Salas**
-
 ---
-
 ## 🎯 Objetivo
-Este proyecto busca evaluar cómo el rendimiento de los cultivos cambia a lo largo del tiempo utilizando el dataset [Crop Yield Prediction Dataset](https://www.kaggle.com/datasets). Se emplea **XGBoost** para modelar datos temporales y se visualizan los resultados en **Streamlit**.
+Predecir los destinos de exportación de fertilizantes de Costa Rica utilizando análisis temporal con **XGBoost**. El proyecto busca identificar patrones y tendencias en las exportaciones de fertilizantes, aprovechando técnicas avanzadas de machine learning para una toma de decisiones más precisa.
 
 ---
-
 ## 📁 Estructura del Proyecto
 ```
-📂 data/                   # Datos crudos y preprocesados
-📂 notebooks/              # Jupyter Notebooks para exploración
-📂 src/                    # Código fuente
-│   ├── extraction.py      # Extracción de datos (API, web scraping, etc.)
-│   ├── storage.py         # Almacenamiento seguro en la nube
-│   ├── preprocessing.py   # Limpieza y transformación de datos
-│   ├── model.py           # Implementación del modelo XGBoost
-│   ├── visualization.py   # Generación de gráficos y análisis
-│   ├── streamlit_app.py   # Aplicación interactiva en Streamlit
-📄 requirements.txt        # Dependencias necesarias
-📄 README.md               # Este archivo
+📂 modules/                # Módulos del proyecto
+│   ├── init.py        # Inicialización del paquete
+│   ├── login.py           # Autenticación y control de acceso
+│   ├── pipeline.py        # Procesamiento de datos y entrenamiento del modelo
+│   ├── results.py         # Análisis y visualización de resultados
+📂 data/                   # Almacenamiento de datos
+│   ├── Fertilizantes_CR_En-Feb_2025.xlsx  # Dataset principal
+│   ├── backup_data.csv    # Respaldo de datos
+📂 config/                 # Configuraciones
+│   └── config.json        # Parámetros de configuración del modelo
+📄 app_control.py          # Script principal de control
+📄 requirements.txt        # Dependencias del proyecto
+📄 README.md               # Documentación del proyecto
 ```
 
 ---
@@ -35,6 +32,11 @@ Este proyecto busca evaluar cómo el rendimiento de los cultivos cambia a lo lar
 ## 🚀 Cómo Ejecutar el Proyecto
 ### 🔧 Instalación
 ```bash
+# Crear entorno virtual
+python -m venv venv
+source venv/bin/activate  # En Windows: venv\Scripts\activate
+
+# Instalar dependencias
 pip install -r requirements.txt
 ```
 
