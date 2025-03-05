@@ -61,6 +61,61 @@ class eda:
                 logging.error(f"Error al cargar el archivo: {path}: {str(e)}")
                 raise
 
+     def show_head(self, n):
+        """Muestra las primeras filas del DataFrame."""
+        self._check_df()
+        st.markdown(f"<u> Estos son los primeros {n} registros del dataset: </u>", unsafe_allow_html=True)
+        return self.df.head(n)
+
+     def describe_data(self):
+        """Genera estadísticas descriptivas básicas del DataFrame."""
+        self._check_df()
+        st.markdown("<u> Estadística descriptiva del conjunto de datos: </u>", unsafe_allow_html=True)
+        return self.df.describe()            
+
+     def check_missing_values(self):
+        """Revisa los valores faltantes en el DataFrame."""
+        self._check_df()
+        missing_values = self.df.isnull().sum()
+        st.markdown("<u> Valores faltantes por columna: </u>", unsafe_allow_html=True)
+        if missing_values.sum() == 0:
+            st.write("¡Todos los valores están completos! No hay valores faltantes.")
+        else:
+            st.write(missing_values)
+
+     def check_data_types(self):
+        """Muestra los tipos de datos de cada columna del DataFrame."""
+        self._check_df()
+        st.markdown("<u> Tipos de datos por columna: </u>", unsafe_allow_html=True)
+        return self.df.dtypes
+
+     def identify_duplicates(self):
+        """Identifica duplicados en el DataFrame."""
+        self._check_df()
+        duplicated = self.df.duplicated()
+        total_duplicates = duplicated.sum()
+
+        st.markdown("<u> Valores duplicados: </u>", unsafe_allow_html=True)
+        if total_duplicates > 0:
+            st.write(f"Se encontraron {total_duplicates} registros duplicados.")
+            st.write("Ejemplos de duplicados:")
+            st.write(self.df[duplicated].head())
+            return True # hay duplicados
+        else:
+            st.write("No se encontraron registros duplicados en el dataset.")
+            return False # no hay duplicados
+
+     def drop_duplicates(self):
+        """Elimina duplicados del DataFrame."""
+        self._check_df()
+        before = len(self.df)
+        self.df = self.df.drop_duplicates()
+        after = len(self.df)
+        st.write(f"Duplicados eliminados. Se pasó de {before} a {after} registros.")
+
+
+
+
      def process_data(self):
             """
             Procesa las columnas no numéricas convirtiéndolas a valores categóricos codificados.
@@ -83,34 +138,6 @@ class eda:
         self._check_df()
         return pd.get_dummies(self.df)
 
-     def show_head(self, n):
-        """Muestra las primeras filas del DataFrame."""
-        self._check_df()
-        st.write(f"Estos son los primeros {n} registros del dataset:")
-        return self.df.head(n)
-
-     def describe_data(self):
-        """Genera estadísticas descriptivas básicas del DataFrame."""
-        self._check_df()
-        st.write("Estadística descriptiva del conjunto de datos:")
-        return self.df.describe()            
-
-     def check_missing_values(self):
-        """Revisa los valores faltantes en el DataFrame."""
-        self._check_df()
-        missing_values = self.df.isnull().sum()
-        st.write("Valores faltantes por columna:")
-        if missing_values.sum() == 0:
-            st.write("¡Todos los valores están completos! No hay valores faltantes.")
-        else:
-            st.write(missing_values)
-
-     def check_data_types(self):
-        """Muestra los tipos de datos de cada columna del DataFrame."""
-        self._check_df()
-        st.write("Tipos de datos por columna:")
-        return self.df.dtypes
-
      def plot_distributions(self):
         """Grafica la distribución de las columnas numéricas."""
         self._check_df()
@@ -120,7 +147,7 @@ class eda:
             st.write("No hay columnas numéricas para graficar.")
             return
         
-        st.write("Distribuciones de variables numéricas:")
+        st.markdown("<u> Distribuciones de variables numéricas:</u>", unsafe_allow_html=True)
         num_cols_per_row = 4 # Agrupacion de los graficos
         col_chunks = [numeric_cols[i:i + num_cols_per_row] for i in range(0, len(numeric_cols), num_cols_per_row)]
 
@@ -191,15 +218,22 @@ class app:
             st.markdown('<h3 class="custom-h3">Análisis de Datos de Cultivos 🌱</h3>', unsafe_allow_html=True)
             st.write("")
             eda_instance = eda()
+            backup_instance = fileHandler()
             #Extraccion de datos desde un archivo CSV en GitHub
             path = "https://raw.githubusercontent.com/alitoxSB/data_pipeline/main/predictive_maintenance.csv"
 
             try:
                 eda_instance.read_dataset(path)
-                df = eda_instance.df  
-
+                df = eda_instance.df
                 st.dataframe(eda_instance.show_head(6))
                 st.write("")
+
+                if eda_instance.identify_duplicates():
+                    eda_instance.drop_duplicates()
+                st.write("")
+                fileHandler.backup_data(eda_instance.df, "backup_data.csv")
+                st.write("***** Datos respaldados en 'Backup_data.csv'. *****")   
+                st.write("")                 
                 st.write(eda_instance.describe_data())
                 st.write("")
                 eda_instance.check_missing_values()
@@ -210,6 +244,7 @@ class app:
 
                 eda_instance.plot_distributions()
                 eda_instance.correlation_matrix()
+                st.write("")
                 eda_instance.outlier_detection()
                 
                 logging.info("Datos extraídos con éxito.")
