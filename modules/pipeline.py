@@ -8,9 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import csv
-import requests
-from io import BytesIO
-
+from sklearn.preprocessing import StandardScaler
 
 #Configuración de login para auditorias
 logging.basicConfig(filename="audit_log.txt", level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -35,26 +33,11 @@ class eda:
             """
             separa = None
             try:
-                if path.endswith(".xls") or path.endswith(".xlsx"):
-                    if path.startswith("http"):
-                        raw_url = path.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/")
-                        response = requests.get(raw_url, stream=True)
-                        if response.status_code == 200:
-                            self.df = pd.read_excel(BytesIO(response.content), sheet_name=0)
-                            st.write("Archivo Excel cargado con éxito desde URL.")
-                            logging.info("Archivo Excel cargado con éxito desde URL.")
-                        else:
-                            raise ValueError(f"Error al descargar el archivo: {response.status_code}")
-                    else:
-                        self.df = pd.read_excel(path, sheet_name=0)
-                        st.write("Archivo Excel cargado con éxito.")
-                        logging.info("Archivo Excel cargado con éxito.")
-
-                elif path.startswith("http"):
-                    self.df = pd.read_csv(path, sep=",", decimal=".")
+                if path.startswith("http"):
+                    self.df = pd.read_csv(path, sep=";", decimal=".")
                 else:
                     with open(path, 'r', encoding='utf-8') as file:
-                        sample = file.read(500)  # Leer una muestra del archivo
+                        sample = file.read(800)  # Leer una muestra del archivo
                         st.write("Muestra del archivo:", sample)
                         if not sample.strip():
                             raise ValueError("El archivo está vacío o no contiene suficientes datos para detectar el separador.")
@@ -103,12 +86,36 @@ class eda:
         st.markdown("<u> Valores duplicados: </u>", unsafe_allow_html=True)
         if total_duplicates > 0:
             st.write(f"Se encontraron {total_duplicates} registros duplicados.")
-            st.write("Ejemplos de duplicados:")
+            st.write("Extracto de los datos duplicados:")
             st.write(self.df[duplicated].head())
             return True # hay duplicados
         else:
             st.write("No se encontraron registros duplicados en el dataset.")
             return False # no hay duplicados
+
+     def analisisNumerico(self):
+        """
+        Verificar si hay columnas numéricas, mostrar un conteo y el nombre de las columnas.
+        """
+        self._check_df() 
+        st.markdown("<u> Columna(s) numérica(s) </u>", unsafe_allow_html=True)
+        try:
+            numeric_columns = self.df.select_dtypes(include=["number"]).columns
+
+            if numeric_columns.size > 0:
+                st.write(f"El dataset contiene {len(numeric_columns)} columna(s) numérica(s).")
+                st.write("Estas son las columnas numéricas:")
+                st.write(list(numeric_columns))
+            else:
+                st.warning("El dataset no contiene columnas numéricas.")
+
+
+            return list(numeric_columns)
+
+        except Exception as e:
+            st.error(f"Ocurrió un error al analizar las columnas numéricas: {e}")
+            logging.error(f"Error en analisisNumerico: {e}")
+            return []
 
      def check_data_types(self):
         """Muestra los tipos de datos de cada columna del DataFrame."""
@@ -116,8 +123,7 @@ class eda:
         st.markdown("<u> Tipos de datos por columna: </u>", unsafe_allow_html=True)
         return self.df.dtypes
 
-
-
+# --------------------  Data cleanning  -------------------- #
 
      def drop_duplicates(self):
         """Elimina duplicados del DataFrame."""
@@ -125,7 +131,66 @@ class eda:
         before = len(self.df)
         self.df = self.df.drop_duplicates()
         after = len(self.df)
+        st.markdown("<u> Registros duplicados: </u> ", unsafe_allow_html=True)
         st.write(f"Duplicados eliminados. Se pasó de {before} a {after} registros.")
+ 
+     def _transform_column(self, column_name, transform_type, all_columns=False):
+        """
+        Transforma una columna en variables dummy o valores categóricos codificados.
+        Si `all_columns` es True, aplica la transformación a todas las columnas categóricas.
+        """
+        try:
+            if all_columns:
+                # Transformar todas las columnas categóricas
+                categorical_cols = self.df.select_dtypes(include=["object", "category"]).columns
+                for col in categorical_cols:
+                    if transform_type == "Variables dummy":
+                        dummies = pd.get_dummies(self.df[col], prefix=col)
+                        self.df = pd.concat([self.df.drop(columns=[col]), dummies], axis=1)
+                    elif transform_type == "Códigos categóricos":
+                        self.df[col] = pd.Categorical(self.df[col]).codes
+                st.success(f"Todas las columnas categóricas fueron transformadas a '{transform_type}'.")
+            else:
+                # Transformar una columna específica
+                if transform_type == "Variables dummy":
+                    dummies = pd.get_dummies(self.df[column_name], prefix=column_name)
+                    self.df = pd.concat([self.df.drop(columns=[column_name]), dummies], axis=1)
+                elif transform_type == "Códigos categóricos":
+                    self.df[column_name] = pd.Categorical(self.df[column_name]).codes
+                st.success(f"La columna '{column_name}' fue transformada usando '{transform_type}'.")
+        except Exception as e:
+            st.warning(f"No se pudo transformar la columna '{column_name}' o las columnas categóricas: {e}")
+
+     def type_transform(self):
+        """
+        Permite al usuario seleccionar cómo transformar las columnas categóricas: 
+        variables dummy o códigos categóricos. Aplica la transformación a una columna específica
+        o a todas las columnas categóricas.
+        """
+        self._check_df()
+        try:
+            st.markdown("<u>Transformar columnas categóricas</u>", unsafe_allow_html=True)
+            transform_options = ["Variables dummy", "Códigos categóricos"]
+            
+            # Escoge entre transformar una columna o todas las columnas
+            option = st.radio("¿Deseas transformar una columna específica o todas las categóricas?", 
+                            ("Columna específica", "Todas las columnas categóricas"))
+
+            # Selecciona el tipo de transformación (dummy o categórico)
+            selected_transform = st.selectbox("Selecciona el tipo de transformación:", transform_options)
+
+            if option == "Columna específica":
+                column_name = st.selectbox("Selecciona la columna a transformar:", 
+                                        self.df.select_dtypes(include=["object", "category"]).columns)
+                if st.button("Transformar columna"):
+                    self._transform_column(column_name, selected_transform)
+
+            elif option == "Todas las columnas categóricas":
+                if st.button("Transformar todas las columnas"):
+                    self._transform_column(None, selected_transform, all_columns=True)
+
+        except Exception as e:
+            st.error(f"Error al intentar transformar las columnas categóricas: {e}")
 
      def describe_data(self):
         """Genera estadísticas descriptivas básicas del DataFrame."""
@@ -133,34 +198,28 @@ class eda:
         st.markdown("<u> Estadística descriptiva del conjunto de datos: </u>", unsafe_allow_html=True)
         return self.df.describe()            
 
+     def delete_irrelevant_values(self):
+        """
+        Elimina columnas del DataFrame que tienen un único valor único (sin variabilidad).
+        """
+        self._check_df()  
+        try:
+            columnas_constantes = [col for col in self.df.columns if self.df[col].nunique() <= 1]
+            
+            if columnas_constantes:
+                st.markdown("<u> Datos constantes que serán eliminados. </u>", unsafe_allow_html=True)
+                st.write(f"Se encontraron {len(columnas_constantes)} columna(s) constante(s) que serán eliminadas:")
+                st.write(columnas_constantes)
+                
+                self.df = self.df.drop(columns=columnas_constantes)
 
+                st.success("Columnas constantes eliminadas exitosamente.")
+            else:
+                st.write("No se encontraron columnas constantes en el DataFrame.")
 
-
-
-
-     def process_data(self):
-            """
-            Procesa las columnas no numéricas convirtiéndolas a valores categóricos codificados.
-            """
-            self._check_df()
-            non_numeric_cols = self.df.select_dtypes(exclude=["number"]).columns
-            for col in non_numeric_cols:
-                if self.df[col].dtype == "object":
-                    self.df[col] = pd.Categorical(self.df[col])
-                    self.df[col] = self.df[col].cat.codes
-            logging.info("Datos procesados con éxito (columnas no numéricas transformadas).")
-
-     def analisisNumerico(self):
-        """Filtra y mantiene solo las columnas numéricas del DataFrame."""
-        self._check_df()
-        return self.df.select_dtypes(include=["number"])
-
-     def analisisCompleto(self):
-        """Convierte las columnas categóricas del DataFrame a variables dummy."""
-        self._check_df()
-        return pd.get_dummies(self.df)
-
-
+        except Exception as e:
+            st.error(f"Un error ocurrió mientras se eliminaban las columnas constantes: {e}")
+            logging.error(f"Error al eliminar columnas constantes: {e}")
 
      def plot_distributions(self):
         """Grafica la distribución de las columnas numéricas."""
@@ -187,11 +246,9 @@ class eda:
      def correlation_matrix(self):
         """Muestra y grafica la matriz de correlación."""
         self._check_df()
-        st.write("Grafico 2:")
         corr = self.df.corr()
-        st.write("Matriz de correlación:")
-        st.write(corr)
-
+        st.markdown("<u> Matriz de correlación: </u>", unsafe_allow_html=True)
+        
         fig, ax = plt.subplots(figsize=(10, 6))
         sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f", ax=ax)
         ax.set_title("Mapa de calor de correlación")
@@ -200,14 +257,65 @@ class eda:
      def outlier_detection(self):
         """Detecta posibles valores atípicos usando diagramas de caja."""
         self._check_df()
-        st.write("Grafico 3:")
         numeric_cols = self.df.select_dtypes(include=["number"]).columns
-        for col in numeric_cols:
-            fig, ax = plt.subplots()
-            sns.boxplot(x=self.df[col], ax=ax)
-            ax.set_title(f"Valores atípicos en {col}")
-            st.pyplot(fig)
+
+        if numeric_cols.empty:
+            st.write("No hay columnas numéricas para graficar.")
+            return
+        
+        st.markdown("<u> Diagramas de caja (Boxplots):</u>", unsafe_allow_html=True)
+        
+        num_cols_per_row = 3
+        col_chunks = [numeric_cols[i:i + num_cols_per_row] for i in range(0, len(numeric_cols), num_cols_per_row)]
+
+        for chunk in col_chunks:
+            cols = st.columns(len(chunk))
+            for col, column_name in zip(cols, chunk):
+                with col:
+                    fig, ax = plt.subplots()
+                    sns.boxplot(x=self.df[column_name], ax=ax)
+                    ax.set_title(f"Valores atípicos en {column_name}")
+                    st.pyplot(fig)
      
+     def advanced_outlier_detection(self):
+        """Detecta valores atípicos utilizando el rango intercuartil (IQR)."""
+        self._check_df()
+        numeric_cols = self.df.select_dtypes(include=["number"]).columns
+
+        st.markdown("<u> Detección avanzada de valores atípicos:</u>", unsafe_allow_html=True)
+        for col in numeric_cols:
+            q1 = self.df[col].quantile(0.25)
+            q3 = self.df[col].quantile(0.75)
+            iqr = q3 - q1
+            lower_bound = q1 - 1.5 * iqr
+            upper_bound = q3 + 1.5 * iqr
+
+            outliers = self.df[(self.df[col] < lower_bound) | (self.df[col] > upper_bound)]
+            st.write(f"Valores atípicos en {col}: {len(outliers)} registros.")
+            st.write(outliers)
+
+     def standardize_data(self):
+        """
+        Estandariza las columnas numéricas del DataFrame.
+        Transforma los datos para que tengan media 0 y desviación estándar 1.
+        """
+        self._check_df()
+        numeric_cols = self.df.select_dtypes(include=["number"]).columns
+
+        if numeric_cols.empty:
+            st.warning("No hay columnas numéricas para estandarizar.")
+            return
+
+        try:
+            scaler = StandardScaler()
+            self.df[numeric_cols] = scaler.fit_transform(self.df[numeric_cols])
+            st.success("Las columnas numéricas han sido estandarizadas con éxito.")
+            st.write(f"Columnas estandarizadas: {list(numeric_cols)}")
+        except Exception as e:
+            st.error(f"Error al estandarizar las columnas: {e}")
+
+
+
 
     # Funcion para verificiar permiso
      def check_access(role):
@@ -239,21 +347,18 @@ st.dataframe(tbl_access)'''
 
 class app:
     def main(self):
-            st.markdown('<h3 class="custom-h3">Análisis de Datos de Cultivos 🌱</h3>', unsafe_allow_html=True)
+            st.markdown('<h3 class="custom-h3">Análisis de Datos de Fertilizantes 🌱</h3>', unsafe_allow_html=True)
             st.write("")
             eda_instance = eda()
             backup_instance = fileHandler()
-            #Extraccion de datos desde un archivo CSV en GitHub
-            path = "https://github.com/CSMore/Admin-Datos-_ModeloPredictivo1/blob/main/Fertilizantes_CR_En-Feb_2025.xlsx"
-            #path = "https://github.com/CSMore/Admin-Datos-_ModeloPredictivo1/raw/main/Fertilizantes_CR_En-Feb_2025.xlsx"
 
-            #path = "https://raw.githubusercontent.com/alitoxSB/data_pipeline/main/predictive_maintenance.csv"
-
-
+            #Extraccion desde GitHub
+            path = "https://raw.githubusercontent.com/CSMore/Datasets/refs/heads/main/Fertilizantes_CR_2024.csv"
 
             try:
                 eda_instance.read_dataset(path)
                 df = eda_instance.df
+                duplicados_existentes = eda_instance.identify_duplicates() #almacenar el resultado
 
                 st.dataframe(eda_instance.show_head(6))
                 st.write("")
@@ -261,29 +366,27 @@ class app:
                 st.write("")
                 eda_instance.identify_duplicates()
                 st.write("")
+                eda_instance.analisisNumerico()
                 st.write(eda_instance.check_data_types())
 
                 fileHandler.backup_data(eda_instance.df, "backup_data.csv")
                 st.write("***** Datos respaldados en 'Backup_data.csv'. *****")   
-                st.write("") 
 
-                if eda_instance.identify_duplicates():
+                st.write(" ********************************************************************* ")
+                st.markdown('<h4 class="custom-h4">Limpieza de los datos 🧹📊</h4>', unsafe_allow_html=True)
+                if duplicados_existentes:
                     eda_instance.drop_duplicates()
                 st.write("")
-             
-                
+                eda_instance.type_transform()
+                st.write(eda_instance.check_data_types())
+                eda_instance.delete_irrelevant_values()
                 st.write(eda_instance.describe_data())
-                
-
-                
-
-                ''' Hay que agregar los cambios en los datos antes de los graficos  '''
-
-
                 eda_instance.plot_distributions()
                 eda_instance.correlation_matrix()
                 st.write("")
                 eda_instance.outlier_detection()
+                eda_instance.advanced_outlier_detection()
+                eda_instance.standardize_data()
                 
                 logging.info("Datos extraídos con éxito.")
             except Exception as e:
