@@ -1,5 +1,5 @@
 # 📌 Análisis Temporal de Exportaciones de Fertilizantes con XGBoost
-![Fertilizer Export Prediction](![Fertilizer Export Prediction](Admin-Datos-_ModeloPredictivo1/time%20series.png))
+![Fertilizer Export Prediction](time_series.png)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/) [![XGBoost](https://img.shields.io/badge/XGBoost-1.6%2B-green)](https://xgboost.ai/) [![Streamlit](https://img.shields.io/badge/Streamlit-App-red)](https://streamlit.io/)
 
 ## 👥 Participantes
