@@ -54,6 +54,7 @@ python modules/pipeline.py   # Cargar y entrenar modelo
 ```bash
 streamlit run app_control.py   # Ejecutar la aplicación principal
 ```
+Como nota tener en cuenta que el menú va a desplegar la opción de pipeline, en esa opción debe asegurarse seleccionar en la sección de transformación "Todas las columnas categóricas" y "Códigos categóricos" antes de seleccionar el botón de "Transformar todas la columnas".
 
 ---
 
