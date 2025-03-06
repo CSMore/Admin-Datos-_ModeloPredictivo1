@@ -20,6 +20,10 @@ logging.basicConfig(filename="audit_log.txt", level=logging.INFO, format="%(asct
 with open("config.json", "r") as f:
     roles = json.load(f)
 
+key = Fernet.generate_key()
+cipher_suite = Fernet(key)
+
+
 class eda:
      def __init__(self):
           self.df = None
@@ -52,11 +56,17 @@ class eda:
         )
         logging.info(f"Columna '{column_name}' encriptada exitosamente.")
 
-     def save_encrypted_data(self, filename="data_procesada_encriptada.csv"):
-        """Guarda el dataset con los datos encriptados."""
+     def save_encrypted_data(self, column_name, filename="data_encriptada.csv"):
+        """Guarda el dataset con los datos encriptados y elimina la columna original."""
         self._check_df()
-        self.df.to_csv(filename, index=False)
+        self.encrypt_column(column_name)
+
+        self.df.to_csv(filename, index=False) #Guardar en csv
         logging.info(f"Datos encriptados guardados en {filename}.")
+
+        if column_name + "_Encriptado" in self.df.columns:
+            self.df.drop(columns=[column_name + "_Encriptado"], inplace=True)
+            logging.info(f"Columna encriptada '{column_name}_Encriptado' eliminada del DataFrame.")
 
      def _check_df(self):
         """Verifica si el DataFrame está cargado."""
@@ -352,8 +362,6 @@ class eda:
             st.error(f"Error al estandarizar las columnas: {e}")
 
 
-
-
     # Funcion para verificiar permiso
      def check_access(role):
         """Esta funcion sirve para verificar los permisos de los roles """
@@ -372,15 +380,12 @@ class fileHandler:
         logging.info(f"Backup realizado con exito en : {filename}")
 
 
-    def save_data(df, filename="data_procesada.csv"):
+    def save_final_data(df, filename="data_estandarizada.csv"):
         """Guarda los datos procesados en un archivo CSV."""
         df.to_csv(filename, index=False)
-        logging.info(f"Datos guardados con éxito en {filename}")
+        logging.info(f"Datos finales estandarizados guardados con éxito en {filename}")
 
-# Database conexion with Azure "In progress"
-'''cnn = st.experimental_connection('data_admin_db', type='sql')
-tbl_access = cnn.query('select * from tbl_access')
-st.dataframe(tbl_access)'''
+    
 
 class app:
     def main(self):
@@ -394,13 +399,15 @@ class app:
 
             try:
                 eda_instance.read_dataset(path)
-                df = eda_instance.df
-                duplicados_existentes = eda_instance.identify_duplicates() #almacenar el resultado
+                eda_instance.save_encrypted_data("Número Documento", filename="datos_encriptados.csv")
+                
+                
 
                 st.dataframe(eda_instance.show_head(6))
                 st.write("")
                 eda_instance.check_missing_values()
                 st.write("")
+                duplicados_existentes = eda_instance.identify_duplicates() #almacenar el resultado
                 eda_instance.identify_duplicates()
                 st.write("")
                 eda_instance.analisisNumerico()
@@ -424,6 +431,9 @@ class app:
                 eda_instance.outlier_detection()
                 eda_instance.advanced_outlier_detection()
                 eda_instance.standardize_data()
+
+                fileHandler.save_final_data(eda_instance.df, "data_final_estandarizado.csv")
+                st.success("Datos finales estandarizados guardados en 'data_final_estandarizado.csv'.")
                 
                 logging.info("Datos extraídos con éxito.")
             except Exception as e:
