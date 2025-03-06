@@ -9,6 +9,9 @@ import numpy as np
 import seaborn as sns
 import csv
 from sklearn.preprocessing import StandardScaler
+import os
+from cryptography.fernet import Fernet
+
 
 #Configuración de login para auditorias
 logging.basicConfig(filename="audit_log.txt", level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -20,6 +23,40 @@ with open("config.json", "r") as f:
 class eda:
      def __init__(self):
           self.df = None
+          self.clave = None
+          self.cipher = None
+          self._load_or_generate_key()
+
+     def _load_or_generate_key(self):
+        """Carga la clave de encriptación desde un archivo o genera una nueva."""
+        key_path = "encryption_key.key"
+        if os.path.exists(key_path):
+            with open(key_path, "rb") as file:
+                self.clave = file.read()
+        else:
+            self.clave = Fernet.generate_key()
+            with open(key_path, "wb") as file:
+                file.write(self.clave)
+        self.cipher = Fernet(self.clave)    
+
+     def encrypt_column(self, column_name):
+        """
+        Encripta una columna del dataset si existe.
+        """
+        self._check_df()
+        if column_name not in self.df.columns:
+            raise KeyError(f"La columna '{column_name}' no existe en el dataset.")
+
+        self.df[column_name + "_Encriptado"] = self.df[column_name].apply(
+            lambda x: self.cipher.encrypt(str(x).encode()).decode()
+        )
+        logging.info(f"Columna '{column_name}' encriptada exitosamente.")
+
+     def save_encrypted_data(self, filename="data_procesada_encriptada.csv"):
+        """Guarda el dataset con los datos encriptados."""
+        self._check_df()
+        self.df.to_csv(filename, index=False)
+        logging.info(f"Datos encriptados guardados en {filename}.")
 
      def _check_df(self):
         """Verifica si el DataFrame está cargado."""

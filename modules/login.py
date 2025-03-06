@@ -11,7 +11,7 @@ def load_css(file_name):
 
 def access():
     load_css("styles.css")
-    st.markdown("<h1 style='text-align: center;'>🌱 Predicción del rendimiento de cultivos</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>🌱 Predicción de exportación de fertilizantes</h1>", unsafe_allow_html=True)
 
     choice = st.selectbox('Login/Sigup', ['Login', 'Sign Up'])
     if choice == 'Login':
