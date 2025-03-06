@@ -38,7 +38,8 @@ def app_control():
 
 
     elif selected == "Resultados":
-        results.analysis.show_results()
+        results_instance = results.app()
+        results_instance.run()
 
 def main():
     if "page" not in st.session_state:

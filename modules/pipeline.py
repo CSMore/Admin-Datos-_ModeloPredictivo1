@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import csv
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, LabelEncoder
 import os
 from cryptography.fernet import Fernet
 
@@ -63,6 +63,10 @@ class eda:
 
         self.df.to_csv(filename, index=False) #Guardar en csv
         logging.info(f"Datos encriptados guardados en {filename}.")
+
+        if column_name in self.df.columns:
+            self.df.drop(columns=[column_name], inplace=True)
+            logging.info(f"Columna original '{column_name}' eliminada del DataFrame.")
 
         if column_name + "_Encriptado" in self.df.columns:
             self.df.drop(columns=[column_name + "_Encriptado"], inplace=True)
@@ -188,8 +192,9 @@ class eda:
         """
         try:
             if all_columns:
-                # Transformar todas las columnas categóricas
                 categorical_cols = self.df.select_dtypes(include=["object", "category"]).columns
+                categorical_cols = [col for col in categorical_cols if col != "Pais Destino"]  # Excluir la variable objetivo
+    
                 for col in categorical_cols:
                     if transform_type == "Variables dummy":
                         dummies = pd.get_dummies(self.df[col], prefix=col)
@@ -197,6 +202,7 @@ class eda:
                     elif transform_type == "Códigos categóricos":
                         self.df[col] = pd.Categorical(self.df[col]).codes
                 st.success(f"Todas las columnas categóricas fueron transformadas a '{transform_type}'.")
+    
             else:
                 # Transformar una columna específica
                 if transform_type == "Variables dummy":
@@ -205,6 +211,16 @@ class eda:
                 elif transform_type == "Códigos categóricos":
                     self.df[column_name] = pd.Categorical(self.df[column_name]).codes
                 st.success(f"La columna '{column_name}' fue transformada usando '{transform_type}'.")
+    
+            # **Convertir TODAS las columnas numéricas a enteros**
+            for col in self.df.select_dtypes(include=['float64', 'float32']).columns:
+                self.df[col] = self.df[col].round(0).astype(int)
+    
+            # **Asegurar que "Pais Destino" se convierte en códigos enteros**
+            if "Pais Destino" in self.df.columns:
+                self.df["Pais Destino"] = pd.Categorical(self.df["Pais Destino"]).codes.astype(int)
+                st.success("✔ La columna 'Pais Destino' ha sido transformada correctamente en códigos enteros.")
+    
         except Exception as e:
             st.warning(f"No se pudo transformar la columna '{column_name}' o las columnas categóricas: {e}")
 
@@ -369,7 +385,6 @@ class eda:
             logging.warning(f"Acceso denegado: Rol {role} no registrado")
             raise PermissionError("Acceso denegado: Rol no registrado")
         return roles[role]["access_level"]
-
 
 
 class fileHandler:

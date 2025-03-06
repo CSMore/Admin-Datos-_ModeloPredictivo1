@@ -1,11 +1,16 @@
 {
-    "admin": {
-        "access_level": "full"
-    },
-    "analyst": {
-        "access_level": "read_only"
-    },
-    "guest": {
-        "access_level": "restricted"
-    }
-} 
+    "users": [
+        {
+            "username": "admin",
+            "password": "admin12"
+        },
+        {
+            "username": "caro",
+            "password": "hola12"
+        },
+        {
+            "username": "caro",
+            "password": "hola12"
+        }
+    ]
+}
