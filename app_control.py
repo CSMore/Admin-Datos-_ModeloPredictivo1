@@ -4,8 +4,6 @@ import modules.pipeline as pipeline  # Importar py Pipeline
 import modules.login as login        # Importar py Login 
 import modules.results as results     # Importar py Results
 
-
-
 st.set_page_config(
     page_title="Testing",
     layout="wide"
@@ -40,9 +38,7 @@ def app_control():
 
 
     elif selected == "Resultados":
-        result_instance = results.app
-        result_instance.main()
-        st.write("Aquí se muestran los resultados 🚀")  
+        results.analysis.show_results()
 
 def main():
     if "page" not in st.session_state:
