@@ -1,0 +1,350 @@
+2025-03-08 10:20:05,718 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:20:05,918 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:20:06,010 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:20:06,018 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:20:06,019 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:20:06,246 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:20:06,376 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 10:20:10,521 - Iniciando aplicación
+2025-03-08 10:20:10,521 - Aplicando estilos CSS personalizados
+2025-03-08 10:20:10,522 - Cargando datos procesados
+2025-03-08 10:20:10,522 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 10:20:10,524 - No se encontró el archivo 'data_final_estandarizado.csv' en la carpeta del código
+2025-03-08 10:20:10,525 - Aplicación terminada: no se pudieron cargar los datos
+2025-03-08 10:20:13,842 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:20:13,990 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:20:14,046 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:20:14,047 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:20:14,048 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:20:14,153 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:20:14,253 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 10:20:22,720 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:20:22,868 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:20:22,930 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:20:22,931 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:20:22,932 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:20:23,048 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:20:23,160 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 10:20:26,661 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:20:26,818 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:20:26,875 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:20:26,877 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:20:26,879 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:20:26,998 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:20:48,818 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:20:48,907 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:20:48,986 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:20:48,988 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:20:48,990 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:20:49,101 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:20:49,193 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 10:20:56,198 - Iniciando aplicación
+2025-03-08 10:20:56,198 - Aplicando estilos CSS personalizados
+2025-03-08 10:20:56,199 - Cargando datos procesados
+2025-03-08 10:20:56,199 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 10:20:56,200 - No se encontró el archivo 'data_final_estandarizado.csv' en la carpeta del código
+2025-03-08 10:20:56,201 - Aplicación terminada: no se pudieron cargar los datos
+2025-03-08 10:21:00,397 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:21:00,485 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:21:00,560 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:21:00,562 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:21:00,563 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:21:00,663 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:21:00,761 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 10:21:15,639 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:21:15,730 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:21:15,790 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:21:15,793 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:21:15,795 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:21:15,909 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:21:16,023 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 10:21:18,150 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:21:18,352 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:21:18,440 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:21:18,443 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:21:18,446 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:21:18,597 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:21:18,729 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 10:21:19,930 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:21:20,155 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:21:20,246 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:21:20,250 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:21:20,253 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:21:20,803 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:21:21,037 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:21:21,123 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:21:21,126 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:21:21,128 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:21:21,255 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:21:30,910 - Datos finales estandarizados guardados con éxito en data_final_estandarizado.csv
+2025-03-08 10:21:30,911 - Datos extraídos con éxito.
+2025-03-08 10:21:45,771 - Iniciando aplicación
+2025-03-08 10:21:45,771 - Aplicando estilos CSS personalizados
+2025-03-08 10:21:45,773 - Cargando datos procesados
+2025-03-08 10:21:45,774 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 10:21:45,823 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 10:21:45,824 - Verificando duplicados en los datos
+2025-03-08 10:21:45,827 - Duplicados encontrados: 0
+2025-03-08 10:21:45,828 - Mostrando muestra de datos
+2025-03-08 10:21:45,832 - Generando resumen de datos
+2025-03-08 10:21:45,837 - Resumen de datos: 3959 filas, 13 columnas, 0 valores nulos
+2025-03-08 10:21:45,840 - Configurando opciones de limpieza de datos
+2025-03-08 10:21:45,843 - Opciones de limpieza seleccionadas: []
+2025-03-08 10:21:45,843 - Guardando datos en session_state
+2025-03-08 10:21:45,844 - Datos originales guardados en session_state (sin limpieza)
+2025-03-08 10:21:52,629 - Iniciando aplicación
+2025-03-08 10:21:52,629 - Aplicando estilos CSS personalizados
+2025-03-08 10:21:52,630 - Cargando datos procesados
+2025-03-08 10:21:52,630 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 10:21:52,650 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 10:21:52,651 - Verificando duplicados en los datos
+2025-03-08 10:21:52,655 - Duplicados encontrados: 0
+2025-03-08 10:21:52,655 - Mostrando muestra de datos
+2025-03-08 10:21:52,659 - Generando resumen de datos
+2025-03-08 10:21:52,665 - Resumen de datos: 3959 filas, 13 columnas, 0 valores nulos
+2025-03-08 10:21:52,670 - Configurando opciones de limpieza de datos
+2025-03-08 10:21:52,672 - Opciones de limpieza seleccionadas: []
+2025-03-08 10:21:52,673 - Guardando datos en session_state
+2025-03-08 10:21:52,673 - Datos originales guardados en session_state (sin limpieza)
+2025-03-08 10:21:52,675 - Iniciando proceso de análisis y modelado
+2025-03-08 10:21:52,676 - Ejecutando análisis con los datos disponibles
+2025-03-08 10:21:52,676 - Iniciando proceso completo de análisis y visualización
+2025-03-08 10:21:52,677 - Aplicando estilos CSS personalizados
+2025-03-08 10:21:52,679 - Iniciando carga de datos para análisis
+2025-03-08 10:21:52,679 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 10:21:52,700 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 10:21:52,701 - Preparando datos para entrenamiento del modelo
+2025-03-08 10:21:52,703 - Datos preparados: X: (3959, 12), y: 3959
+2025-03-08 10:21:52,704 - Iniciando entrenamiento del modelo
+2025-03-08 10:21:52,704 - Iniciando entrenamiento del modelo XGBoost
+2025-03-08 10:21:52,704 - Realizando división train-test
+2025-03-08 10:21:52,711 - División completada: X_train: (3167, 12), X_test: (792, 12)
+2025-03-08 10:21:52,711 - Inicializando modelo XGBClassifier
+2025-03-08 10:21:52,711 - Configurando conjunto de evaluación
+2025-03-08 10:21:52,711 - Iniciando entrenamiento del modelo
+2025-03-08 10:21:52,721 - Error durante el entrenamiento del modelo: Invalid classes inferred from unique values of `y`.  Expected: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+ 24 25 26 27], got [-4.81017013 -4.55801897 -4.30586782 -4.05371667 -3.80156552 -3.54941437
+ -3.04511207 -2.79296092 -2.54080977 -2.28865862 -2.03650746 -1.78435631
+ -1.53220516 -1.28005401 -1.02790286 -0.77575171 -0.52360056 -0.27144941
+ -0.01929826  0.23285289  0.48500405  0.7371552   0.98930635  1.2414575
+  1.49360865  1.7457598   1.99791095  2.2500621 ]
+2025-03-08 10:21:52,721 - Proceso terminado: no se pudo entrenar el modelo
+2025-03-08 10:21:52,721 - Proceso de análisis y modelado completado
+2025-03-08 10:38:30,574 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:38:30,622 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:38:30,654 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:38:30,656 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:38:30,657 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:38:30,800 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:38:30,885 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 10:38:36,300 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:38:36,475 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:38:36,531 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:38:36,533 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:38:36,535 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:38:36,650 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:38:36,733 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 10:38:38,581 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:38:38,766 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:38:38,821 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:38:38,824 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:38:38,826 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:38:38,968 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:38:39,106 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 10:38:40,469 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:38:40,618 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:38:40,684 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:38:40,686 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:38:40,689 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:38:40,812 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:38:49,893 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:38:50,003 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:38:50,064 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:38:50,067 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:38:50,068 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:38:50,164 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:38:50,243 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 10:38:52,770 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:38:52,914 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:38:52,973 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:38:52,975 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:38:52,978 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:38:53,093 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:38:53,185 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 10:38:55,654 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:38:55,799 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:38:55,866 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:38:55,869 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:38:55,872 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:38:55,999 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:38:56,621 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:38:56,771 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:38:56,851 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:38:56,853 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:38:56,855 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:38:56,964 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:39:03,874 - Datos finales estandarizados guardados con éxito en data_final_estandarizado.csv
+2025-03-08 10:39:03,875 - Datos extraídos con éxito.
+2025-03-08 10:39:13,517 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 10:39:13,557 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 10:39:18,039 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 10:39:18,065 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 10:39:18,071 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 10:39:18,095 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 10:39:18,097 - Iniciando entrenamiento del modelo XGBoost Regressor
+2025-03-08 10:39:18,102 - Error durante el entrenamiento del modelo: XGBModel.fit() got an unexpected keyword argument 'eval_metric'
+2025-03-08 10:50:14,899 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:50:15,040 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:50:15,096 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:50:15,099 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:50:15,100 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:50:15,243 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:50:15,333 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 10:50:25,769 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:50:25,936 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:50:26,001 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:50:26,004 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:50:26,006 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:50:26,122 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:50:26,218 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 10:50:28,300 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:50:28,470 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:50:28,558 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:50:28,562 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:50:28,565 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:50:29,157 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 10:50:29,327 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 10:50:29,398 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 10:50:29,400 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 10:50:29,403 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 10:50:29,514 - Backup realizado con exito en : backup_data.csv
+2025-03-08 10:50:34,957 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 10:50:35,048 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 10:50:38,699 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 10:50:38,725 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 10:50:38,728 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 10:50:38,744 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 10:50:38,745 - Iniciando entrenamiento del modelo XGBoost Regressor
+2025-03-08 11:06:47,989 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 11:06:48,324 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 11:06:48,424 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 11:06:48,427 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 11:06:48,428 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 11:06:48,628 - Backup realizado con exito en : backup_data.csv
+2025-03-08 11:06:48,762 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 11:06:54,923 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 11:06:55,109 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 11:06:55,276 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 11:06:55,280 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 11:06:55,282 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 11:06:55,472 - Backup realizado con exito en : backup_data.csv
+2025-03-08 11:06:55,638 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 11:07:00,174 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 11:07:00,460 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 11:07:00,571 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 11:07:00,573 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 11:07:00,574 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 11:07:00,708 - Backup realizado con exito en : backup_data.csv
+2025-03-08 11:07:00,826 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 11:07:03,731 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 11:07:04,101 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 11:07:04,181 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 11:07:04,183 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 11:07:04,187 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 11:07:04,358 - Backup realizado con exito en : backup_data.csv
+2025-03-08 11:07:04,526 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 11:07:11,533 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 11:07:11,788 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 11:07:11,868 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 11:07:11,871 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 11:07:11,872 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 11:07:12,036 - Backup realizado con exito en : backup_data.csv
+2025-03-08 11:07:22,980 - Datos finales estandarizados guardados con éxito en data_final_estandarizado.csv
+2025-03-08 11:07:22,982 - Datos extraídos con éxito.
+2025-03-08 11:07:39,553 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 11:07:39,592 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 11:07:41,210 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 11:07:41,237 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 11:07:41,242 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 11:07:41,276 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 11:07:41,278 - Iniciando entrenamiento del modelo XGBoost Regressor
+2025-03-08 11:11:38,895 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 11:11:39,085 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 11:11:39,186 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 11:11:39,190 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 11:11:39,194 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 11:11:39,360 - Backup realizado con exito en : backup_data.csv
+2025-03-08 11:11:39,496 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 11:11:47,506 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 11:11:47,654 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 11:11:47,712 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 11:11:47,714 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 11:11:47,716 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 11:11:47,838 - Backup realizado con exito en : backup_data.csv
+2025-03-08 11:11:47,955 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 11:11:55,097 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 11:11:55,327 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 11:11:55,443 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 11:11:55,446 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 11:11:55,449 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 11:11:55,647 - Backup realizado con exito en : backup_data.csv
+2025-03-08 11:11:55,799 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 11:11:59,413 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 11:11:59,678 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 11:11:59,807 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 11:11:59,812 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 11:11:59,817 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 11:11:59,996 - Backup realizado con exito en : backup_data.csv
+2025-03-08 11:12:07,992 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 11:12:08,042 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 11:12:12,369 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 11:12:12,392 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 11:12:12,395 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 11:12:12,413 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 11:12:12,414 - Iniciando entrenamiento del modelo XGBoost Regressor
+2025-03-08 11:15:25,560 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 11:15:25,894 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 11:15:26,007 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 11:15:26,011 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 11:15:26,015 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 11:15:26,206 - Backup realizado con exito en : backup_data.csv
+2025-03-08 11:15:26,328 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 11:15:32,530 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 11:15:32,783 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 11:15:32,894 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 11:15:32,898 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 11:15:32,901 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 11:15:33,069 - Backup realizado con exito en : backup_data.csv
+2025-03-08 11:15:33,216 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 11:15:37,196 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 11:15:37,531 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 11:15:37,664 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 11:15:37,671 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 11:15:37,676 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 11:15:37,902 - Backup realizado con exito en : backup_data.csv
+2025-03-08 11:15:38,074 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 11:15:43,507 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 11:15:43,785 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 11:15:43,931 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 11:15:43,934 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 11:15:43,938 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 11:15:44,590 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 11:15:44,816 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 11:15:44,904 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 11:15:44,906 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 11:15:44,907 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 11:15:45,025 - Backup realizado con exito en : backup_data.csv
+2025-03-08 11:15:45,125 - Error al cargar los datos: could not convert string to float: '3/2/2024 9:42'
+2025-03-08 11:15:47,994 - Datos cargados con éxito. Separador detectado: 'None'
+2025-03-08 11:15:48,280 - Columna 'Número Documento' encriptada exitosamente.
+2025-03-08 11:15:48,386 - Datos encriptados guardados en datos_encriptados.csv.
+2025-03-08 11:15:48,389 - Columna original 'Número Documento' eliminada del DataFrame.
+2025-03-08 11:15:48,391 - Columna encriptada 'Número Documento_Encriptado' eliminada del DataFrame.
+2025-03-08 11:15:48,543 - Backup realizado con exito en : backup_data.csv
+2025-03-08 11:15:54,087 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 11:15:54,109 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 11:16:01,082 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 11:16:01,111 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 11:16:01,116 - Iniciando carga de datos desde 'data_final_estandarizado.csv'
+2025-03-08 11:16:01,152 - Datos cargados exitosamente: 3959 filas, 13 columnas
+2025-03-08 11:16:01,153 - Iniciando entrenamiento del modelo XGBoost Regressor
